@@ -1,7 +1,7 @@
-/**
- * Module dependencies
- */
+import Get from './get';
+import Set from './set';
+import * as Registry from './registry';
 
-exports.SetContent = exports.Set = require('./set');
-exports.GetContent = exports.Get = require('./get');
-exports.registry = require('./registry');
+export const SetContent = Set;
+export const GetContent = Get;
+export const registry = Registry;

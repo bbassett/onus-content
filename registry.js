@@ -3,14 +3,14 @@
  */
 
 var EventEmitter = require('events').EventEmitter;
- 
+
 var contents = {};
 var emitter = new EventEmitter();
 
 /**
  * Subscribe to a named content block
  */
- 
+
 exports.subscribe = function(name, fn) {
   function subscription(children) {
     fn(children);
@@ -44,17 +44,17 @@ exports.watch = function(fn) {
 /**
  * Register content for a named block with a depth
  */
- 
+
 exports.register = function(name, children, depth, location) {
   var content = contents[name] = contents[name] || {};
   if (!children) delete content[depth];
   else content[depth] = {c: children, l: location || 0};
- 
+
   var deepest = findDeepest(name);
   emitter.emit(name, deepest);
   emitter.emit('__register__', name, deepest);
 };
- 
+
 function findDeepest(name) {
   var content = contents[name] = contents[name] || {};
   return Object.keys(content).sort().reduce(function(acc, k) {

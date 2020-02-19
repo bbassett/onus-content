@@ -1,18 +1,16 @@
-/**
- * Module dependencies
- */
+import { Component } from 'react';
+import { register } from './registry.js';
 
-var React = require('react');
-var register = require('./registry').register;
-
-var Set = React.createClass({
-  componentWillReceiveProps: function(next) {
+class Set extends Component {
+  componentWillReceiveProps(next) {
     // TODO unregister old names/depths
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     register(this.props.name, null, this.props.depth);
-  },
-  render: function() {
+  }
+
+  render() {
     var props = this.props;
 
     var location = props.prepend ?
@@ -21,10 +19,10 @@ var Set = React.createClass({
         2 :
         0;
 
+    console.log(props)
     register(props.name, props.children, props.depth, location);
     return false;
   }
-});
+}
 
-exports = module.exports = Set;
-exports['default'] = Set;
+export default Set;
